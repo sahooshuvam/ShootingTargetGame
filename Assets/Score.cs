@@ -7,27 +7,31 @@ public class Score : MonoBehaviour
 {
     int score;
     public Text textScore;
-    public SpriteRenderer sprite;
+    public GameObject youWin;
+    public GameObject gameOver;
     public bool isGameWin = false;
-    private void Start()
-    {
-        sprite.enabled = false;
-    }
-
-
+    public bool isGameOver = false;
+    public float time;
     private void Update()
     {
-        textScore.text = score.ToString();          
+        time = time + Time.deltaTime;
+        textScore.text = score.ToString();
+        if (time >10f)
+        {
+            gameOver.SetActive(true);
+            isGameOver = true;
+        }
 
     }
 
     public void ScoreManager(int scoreValue)
     {
+        
         score = score + scoreValue;
         Debug.Log("Score : " +score);
         if  (score > 50)
         {
-            sprite.enabled = true;
+            youWin.SetActive(true);
             isGameWin = true;
         }
 

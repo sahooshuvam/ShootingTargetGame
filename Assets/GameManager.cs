@@ -10,14 +10,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnMethed",1f,1f);
+        InvokeRepeating("SpawnMethed",2f,2f);
         score = GameObject.Find("ScoreManager").GetComponent<Score>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (score.isGameWin == true)
+        if (score.isGameWin == true || score.isGameOver == true)
         {
             CancelInvoke("SpawnMethed");
         }
@@ -25,13 +25,9 @@ public class GameManager : MonoBehaviour
 
     private void SpawnMethed()
     {
-        float xRandom = UnityEngine.Random.Range(-1f,3.5f);
-        float yRandom = UnityEngine.Random.Range(-7f,7f);
+        float xRandom = UnityEngine.Random.Range(-7f,7f);
+        float yRandom = UnityEngine.Random.Range(-1f, 3.5f);
         Instantiate(targetPrefab,new Vector3(xRandom,yRandom,0),Quaternion.identity);
     }
 }
 
-
-// put some audio 
-// Win game >> Apply Win Sound
-//Lost game >> "Play again"
